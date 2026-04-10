@@ -22,11 +22,11 @@ def load_artefacts():
 
 model, scaler, label_enc, feature_cols = load_artefacts()
 
-NUMERIC_COLS = ["Temp (°C)", "Relative Humidity (%)", "Light (Lux)", "CO2 (ppm)"]
+NUMERIC_COLS = ["Temp", "Humid (%)", "Light (Fux)", "CO2 (pmm)"]
 FRUIT_OPTIONS = ["Banana", "Orange", "Pineapple", "Tomato"]
 
 # ── Page config ─────────────────────────────────────────────
-st.set_page_config(page_title="🧊🍌🍊🍍🍅Cold Storage Classifier", page_icon="🧊", layout="centered")
+st.set_page_config(page_title="🧊 Cold Storage Classifier", page_icon="🧊", layout="centered")
 
 st.title("🧊🍌🍊🍍🍅Cold Storage Fruit Quality Classifier")
 st.markdown(
@@ -45,7 +45,7 @@ with st.sidebar:
         "*Bad* (suboptimal) for fruit spoilage prevention."
     )
     st.markdown("**Features used:**")
-    st.markdown("- Fruit type\n- Temperature (°C)\n- Humidity (%)\n- Light intensity (Lux)\n- CO₂ concentration (ppm)")
+    st.markdown("- Fruit type\n- Temperature (°C)\n- Humidity (%)\n- Light intensity (Fux)\n- CO₂ concentration (ppm)")
     st.divider()
     st.caption("Built with Scikit-learn & Streamlit")
 
@@ -67,10 +67,10 @@ if st.button("🔍 Predict Condition", type="primary", use_container_width=True)
 
     # Build a single-row dataframe matching the training schema
     row = {
-        "Temp (°C)": temp,
-        "Relative Humidity (%)": humid,
-        "Light (Lux)": light,
-        "CO2 (ppm)": co2,
+        "Temp": temp,
+        "Humid (%)": humid,
+        "Light (Fux)": light,
+        "CO2 (pmm)": co2,
         "Fruit_Banana": int(fruit == "Banana"),
         "Fruit_Orange": int(fruit == "Orange"),
         "Fruit_Pineapple": int(fruit == "Pineapple"),
