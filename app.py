@@ -22,13 +22,13 @@ def load_artefacts():
 
 model, scaler, label_enc, feature_cols = load_artefacts()
 
-NUMERIC_COLS = ["Temp", "Humid (%)", "Light (Fux)", "CO2 (pmm)"]
+NUMERIC_COLS = ["Temp (°C)", "Relative Humidity (%)", "Light (Lux)", "CO2 (ppm)"]
 FRUIT_OPTIONS = ["Banana", "Orange", "Pineapple", "Tomato"]
 
 # ── Page config ─────────────────────────────────────────────
-st.set_page_config(page_title="🧊 Cold Storage Classifier", page_icon="🧊", layout="centered")
+st.set_page_config(page_title="🧊🍌🍊🍍🍅Cold Storage Classifier", page_icon="🧊", layout="centered")
 
-st.title("🧊 Cold Storage Fruit Quality Classifier")
+st.title("🧊🍌🍊🍍🍅Cold Storage Fruit Quality Classifier")
 st.markdown(
     "Predict whether the cold-storage environment is **Optimal (Good)** or "
     "**Suboptimal (Bad)** for spoilage prevention based on sensor readings."
@@ -40,12 +40,12 @@ st.divider()
 with st.sidebar:
     st.header("About")
     st.markdown(
-        "This app uses a **Random Forest** model trained on ~11 000 cold-storage "
+        "This app uses a **Random Forest** model trained on ~8000+ cold-storage "
         "sensor records. It classifies conditions as *Good* (optimal) or "
         "*Bad* (suboptimal) for fruit spoilage prevention."
     )
     st.markdown("**Features used:**")
-    st.markdown("- Fruit type\n- Temperature (°C)\n- Humidity (%)\n- Light intensity (Fux)\n- CO₂ concentration (ppm)")
+    st.markdown("- Fruit type\n- Temperature (°C)\n- Humidity (%)\n- Light intensity (Lux)\n- CO₂ concentration (ppm)")
     st.divider()
     st.caption("Built with Scikit-learn & Streamlit")
 
@@ -67,10 +67,10 @@ if st.button("🔍 Predict Condition", type="primary", use_container_width=True)
 
     # Build a single-row dataframe matching the training schema
     row = {
-        "Temp": temp,
-        "Humid (%)": humid,
-        "Light (Fux)": light,
-        "CO2 (pmm)": co2,
+        "Temp (°C)": temp,
+        "Relative Humidity (%)": humid,
+        "Light (Lux)": light,
+        "CO2 (ppm)": co2,
         "Fruit_Banana": int(fruit == "Banana"),
         "Fruit_Orange": int(fruit == "Orange"),
         "Fruit_Pineapple": int(fruit == "Pineapple"),
@@ -106,7 +106,7 @@ if st.button("🔍 Predict Condition", type="primary", use_container_width=True)
 # ── Batch prediction ────────────────────────────────────────
 st.divider()
 st.subheader("📁 Batch Prediction (Upload CSV)")
-st.markdown("Upload a CSV with columns: `Fruit`, `Temp`, `Humid (%)`, `Light (Fux)`, `CO2 (pmm)`")
+st.markdown("Upload a CSV with columns: `Fruit`, `Temp (°C)`, `Relative Humidity (%)`, `Light (Lux)`, `CO2 (ppm)`")
 
 uploaded = st.file_uploader("Choose a CSV file", type=["csv"])
 
